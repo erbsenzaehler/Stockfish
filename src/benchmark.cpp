@@ -85,6 +85,78 @@ const vector<string> Defaults = {
   "setoption name UCI_Chess960 value true",
   "bbqnnrkr/pppppppp/8/8/8/8/PPPPPPPP/BBQNNRKR w KQkq - 0 1 moves g2g3 d7d5 d2d4 c8h3 c1g5 e8d6 g5e7 f7f6",
   "setoption name UCI_Chess960 value false"
+  
+  // dtmTest()
+  "4k3/R7/4K3/8/8/8/8/8 w - - 0 1",
+  
+  // Test castling
+  "4k3/8/8/8/8/8/8/4K2R w K - 0 1",
+  "4k3/8/8/8/8/8/8/4K2R w - - 0 1",
+  
+  // Test en passant
+  "8/8/4k3/8/3pP3/8/3P4/4K3 b - e3 0 1",
+  "8/8/4k3/8/3pP3/8/3P4/4K3 b - - 0 1",
+ 
+  // Test where en passant is only legal move
+  "8/8/8/8/Pp6/1K6/3N4/k7 b - a3 0 1",
+  "k1K5/8/8/8/4pP2/4Q3/8/8 b - - 0 1",
+  "k1K5/8/8/8/4pP2/4Q3/8/8 b - f3 0 1",
+ 
+  //rtb-test()
+  "8/8/4k3/8/8/8/4K3/3NB3 w - - 0 1",
+  "8/8/4k3/8/8/8/4K3/3NB3 b - - 0 1",
+  "8/8/4k3/8/8/8/4K3/3BB3 b - - 0 1",
+  "8/8/4k3/8/8/8/4K3/3NN3 b - - 0 1",
+ 
+  // Check that DTZ probes do not give too good (incorrect) bounds
+  "8/8/8/8/7B/8/3k4/K2B4 w - - 0 1",
+  "1R5Q/8/6k1/8/4q3/8/8/K7 b - - 0 1",
+ 
+  // Tests where DTZ is close to 100
+  "1R5Q/8/6k1/8/4q3/8/8/K7 b - - 0 1", // DTZ = 100
+  "1R5Q/8/6k1/8/4q3/8/8/K7 b - - 1 1", // DTZ = 100
+  "7q/3N2k1/8/8/8/7Q/8/1K6 w - - 0 1", // DTZ = 30
+  "7q/3N2k1/8/8/8/7Q/8/1K6 w - - 69 1",
+  
+  // DTZ = 30, DTZ + hmc = 100. RTB does not know the answer
+  // because the TB class has maxDTZ < 100
+  "7q/3N2k1/8/8/8/7Q/8/1K6 w - - 70 1",
+  
+  // DTZ + hmc > 100, draw
+  "7q/3N2k1/8/8/8/7Q/8/1K6 w - - 71 1",
+  "8/1R6/4q3/6k1/8/8/6K1/1Q6 b - - 0 1", // DTZ = 46
+  
+  // DTZ + hmc = 100, but RTB still knows the answer because maxDTZ = 100
+  "8/1R6/4q3/6k1/8/8/6K1/1Q6 b - - 54 1", // DTZ = 46
+  
+  // DTZ + hmc = 101, draw
+  "8/1R6/4q3/6k1/8/8/6K1/1Q6 b - - 55 1", // DTZ = 46
+  "1R5Q/8/6k1/8/8/8/8/K1q5 w - - 0 1", // DTZ == 101
+  "1R5Q/8/6k1/8/8/8/2q5/K7 b - - 0 1", // DTZ == -102
+  "8/8/8/pk1K4/8/3N1N2/8/8 w - - 0 1", // DTZ == 22
+  "8/8/8/pk1K4/8/3N1N2/8/8 w - - 85 1", // DTZ == 22
+  "6k1/8/5Q2/6K1/6Pp/8/8/7Q b - g3 0 1",
+  "3K4/8/3k4/8/4p3/4B3/5P2/8 w - - 0 5",
+  
+  // tbTest()
+  // DTM > 100 when ignoring 50-move rule, RTB probes must be used when available
+  "1R5Q/8/6k1/8/4q3/8/8/K7 b - - 0 1",
+  
+  // Half-move clock small, DTM mate wins
+  "R5Q1/8/6k1/8/4q3/8/8/K7 b - - 0 1",
+  
+  // Half-move clock large, must follow DTZ path to win     
+  "R5Q1/8/6k1/8/4q3/8/8/K7 b - - 90 1",
+  
+  // Mate in one, half-move clock small
+  "8/8/4B3/8/kBK5/8/8/8 w - - 0 1",         
+  
+  // Mate in one, half-move clock large
+  "8/8/4B3/8/kBK5/8/8/8 w - - 99 1",
+  
+  "8/8/3pk3/8/8/3NK3/3N4/8 w - - 70 1", // DTZ = 38
+  "8/8/4k1N1/p7/8/8/3N2K1/8 w - - 0 1", // DTZ = 116
+  "3qk3/8/8/8/8/8/8/3QK3 w - - 0 1",
 };
 
 } // namespace

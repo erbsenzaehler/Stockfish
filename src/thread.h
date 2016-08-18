@@ -32,8 +32,9 @@
 #include "pawns.h"
 #include "position.h"
 #include "search.h"
-#include "thread_win32.h"
 
+typedef std::mutex Mutex;
+typedef std::condition_variable ConditionVariable;
 
 /// Thread class keeps together all the thread-related stuff. We use
 /// per-thread pawn and material hash tables so that once we get a

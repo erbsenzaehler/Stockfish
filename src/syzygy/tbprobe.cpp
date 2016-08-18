@@ -32,7 +32,7 @@
 #include "../movegen.h"
 #include "../position.h"
 #include "../search.h"
-#include "../thread_win32.h"
+#include "../thread.h"
 #include "../types.h"
 #include "../uci.h"
 
@@ -45,7 +45,9 @@
 #include <sys/stat.h>
 #else
 #define WIN32_LEAN_AND_MEAN
+#ifndef NOMINMAX
 #define NOMINMAX
+#endif
 #include <windows.h>
 #endif
 

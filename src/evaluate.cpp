@@ -18,16 +18,21 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "evaluate.h"
+
 #include <algorithm>
 #include <cassert>
+#include <cstdlib>
 #include <cstring>   // For std::memset
 #include <iomanip>
+#include <iosfwd>
 #include <sstream>
+#include <string>
 
 #include "bitboard.h"
-#include "evaluate.h"
 #include "material.h"
 #include "pawns.h"
+#include "position.h"
 
 namespace {
 

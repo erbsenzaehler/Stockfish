@@ -22,11 +22,9 @@
 #define SEARCH_H_INCLUDED
 
 #include <atomic>
-#include <vector>
 
 #include "misc.h"
 #include "movepick.h"
-#include "types.h"
 
 class Position;
 

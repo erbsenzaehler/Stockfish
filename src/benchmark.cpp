@@ -18,15 +18,22 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <cstddef>
+#include <cstdint>
+#include <deque>
 #include <fstream>
 #include <iostream>
 #include <istream>
+#include <map>
+#include <memory>
+#include <string>
 #include <vector>
 
 #include "misc.h"
 #include "position.h"
 #include "search.h"
 #include "thread.h"
+#include "types.h"
 #include "uci.h"
 
 using namespace std;

@@ -18,9 +18,11 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <algorithm>
-
 #include "bitboard.h"
+
+#include <algorithm>
+#include <cstdint>
+
 #include "misc.h"
 
 uint8_t PopCnt16[1 << 16];

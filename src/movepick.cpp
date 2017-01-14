@@ -18,9 +18,14 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <cassert>
-
 #include "movepick.h"
+
+#include <algorithm>
+#include <cassert>
+#include <type_traits>
+
+#include "position.h"
+#include "search.h"
 #include "thread.h"
 
 namespace {

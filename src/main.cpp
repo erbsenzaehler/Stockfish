@@ -19,14 +19,17 @@
 */
 
 #include <iostream>
+#include <map>
 
 #include "bitboard.h"
+#include "misc.h"
+#include "pawns.h"
 #include "position.h"
 #include "search.h"
+#include "syzygy/tbprobe.h"
 #include "thread.h"
 #include "tt.h"
 #include "uci.h"
-#include "syzygy/tbprobe.h"
 
 namespace PSQT {
   void init();

@@ -22,18 +22,19 @@
 #define THREAD_H_INCLUDED
 
 #include <atomic>
-#include <bitset>
-#include <condition_variable>
-#include <mutex>
+#include <cstddef>
+#include <cstdint>
 #include <thread>
 #include <vector>
 
+#include "endgame.h"
 #include "material.h"
 #include "movepick.h"
 #include "pawns.h"
 #include "position.h"
 #include "search.h"
 #include "thread_win32.h"
+#include "types.h"
 
 
 /// Thread struct keeps together all the thread-related stuff. We also use

@@ -18,11 +18,12 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "tt.h"
+
 #include <cstring>   // For std::memset
 #include <iostream>
 
 #include "bitboard.h"
-#include "tt.h"
 
 TranspositionTable TT; // Our global transposition table
 

@@ -21,12 +21,13 @@
 #ifndef MOVEPICK_H_INCLUDED
 #define MOVEPICK_H_INCLUDED
 
-#include <algorithm> // For std::max
+#include <cstdlib>
 #include <cstring>   // For std::memset
 
 #include "movegen.h"
-#include "position.h"
 #include "types.h"
+
+class Position;
 
 
 /// HistoryStats records how often quiet moves have been successful or unsuccessful
@@ -90,7 +91,9 @@ typedef Stats<CounterMoveStats> CounterMoveHistoryStats;
 /// when MOVE_NONE is returned. In order to improve the efficiency of the alpha
 /// beta algorithm, MovePicker attempts to return the moves which are most likely
 /// to get a cut-off first.
-namespace Search { struct Stack; }
+namespace Search {
+struct Stack;
+}  // namespace Search
 
 class MovePicker {
 public:

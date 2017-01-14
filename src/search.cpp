@@ -18,24 +18,33 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "search.h"
+
 #include <algorithm>
+#include <atomic>
 #include <cassert>
 #include <cmath>
+#include <cstdint>
+#include <cstdlib>
 #include <cstring>   // For std::memset
 #include <iostream>
+#include <map>
 #include <sstream>
+#include <type_traits>
+#include <vector>
 
+#include "bitboard.h"
 #include "evaluate.h"
 #include "misc.h"
 #include "movegen.h"
 #include "movepick.h"
 #include "position.h"
-#include "search.h"
-#include "timeman.h"
-#include "thread.h"
-#include "tt.h"
-#include "uci.h"
 #include "syzygy/tbprobe.h"
+#include "thread.h"
+#include "timeman.h"
+#include "tt.h"
+#include "types.h"
+#include "uci.h"
 
 namespace Search {
 

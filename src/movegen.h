@@ -21,6 +21,8 @@
 #ifndef MOVEGEN_H_INCLUDED
 #define MOVEGEN_H_INCLUDED
 
+#include <cstddef>
+
 #include "types.h"
 
 class Position;

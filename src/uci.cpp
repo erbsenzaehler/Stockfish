@@ -18,18 +18,26 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "uci.h"
+
+#include <atomic>
+#include <cctype>
+#include <cstdlib>
+#include <deque>
 #include <iostream>
 #include <sstream>
+#include <memory>
 #include <string>
+#include <vector>
 
 #include "evaluate.h"
+#include "misc.h"
 #include "movegen.h"
 #include "position.h"
 #include "search.h"
+#include "syzygy/tbprobe.h"
 #include "thread.h"
 #include "timeman.h"
-#include "uci.h"
-#include "syzygy/tbprobe.h"
 
 using namespace std;
 

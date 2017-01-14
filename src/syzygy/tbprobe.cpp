@@ -19,29 +19,34 @@
 
 #include <algorithm>
 #include <atomic>
+#include <cassert>
 #include <cstdint>
+#include <cstdlib>
 #include <cstring>   // For std::memset
 #include <deque>
 #include <fstream>
 #include <iostream>
-#include <list>
+#include <mutex>
 #include <sstream>
+#include <string>
 #include <type_traits>
+#include <utility>
+#include <vector>
 
 #include "../bitboard.h"
+#include "../misc.h"
 #include "../movegen.h"
 #include "../position.h"
 #include "../search.h"
 #include "../thread_win32.h"
 #include "../types.h"
-
 #include "tbprobe.h"
 
 #ifndef _WIN32
 #include <fcntl.h>
-#include <unistd.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#include <unistd.h>
 #else
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX

@@ -22,9 +22,11 @@
 #define MISC_H_INCLUDED
 
 #include <cassert>
+#include <cstddef>
+#include <cstdint>
 #include <chrono>
 #include <ostream>
-#include <string>
+#include <type_traits>
 #include <vector>
 
 #include "types.h"

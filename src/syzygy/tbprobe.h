@@ -23,6 +23,9 @@
 #include <ostream>
 
 #include "../search.h"
+#include "../types.h"
+
+class Position;
 
 namespace Tablebases {
 

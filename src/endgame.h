@@ -21,14 +21,15 @@
 #ifndef ENDGAME_H_INCLUDED
 #define ENDGAME_H_INCLUDED
 
+#include <iosfwd>
 #include <map>
 #include <memory>
-#include <string>
 #include <type_traits>
 #include <utility>
 
-#include "position.h"
 #include "types.h"
+
+class Position;
 
 
 /// EndgameType lists all supported endgames

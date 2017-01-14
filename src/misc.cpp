@@ -24,6 +24,7 @@
 #define _WIN32_WINNT 0x0601 // Force to include needed API prototypes
 #endif
 #include <windows.h>
+
 // The needed Windows API for processor groups could be missed from old Windows
 // versions, so instead of calling them directly (forcing the linker to resolve
 // the calls at compile time), try to load them at runtime. To do this we need
@@ -36,13 +37,14 @@ typedef bool(*fun3_t)(HANDLE, CONST GROUP_AFFINITY*, PGROUP_AFFINITY);
 }
 #endif
 
+#include "misc.h"
+
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
-#include <vector>
+#include <string>
 
-#include "misc.h"
 #include "thread.h"
 
 using namespace std;

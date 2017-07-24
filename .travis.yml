@@ -67,7 +67,10 @@ script:
   - if [ -x "$(command -v valgrind )" ]; then make clean && make -j2 ARCH=x86-64 debug=yes optimize=no build > /dev/null && ../tests/instrumented.sh --valgrind; fi
   - if [ -x "$(command -v valgrind )" ]; then ../tests/instrumented.sh --valgrind-thread; fi
   #
-  # Sanitizer
+  # lcov
+  #
+  - if [ -x "$(command -v lcov )" -a "$COMP" == "gcc" ]; then make clean && make ARCH=x86-64 profile-build lcov=yes optimize=no > /dev/null && printf "Coverage: Lines %s of %s (%s%%), Functions %s of %s (%s%%)\n" `grep headerCovTableEntry coveragedir/src/index.html | grep -o '[0-9\.][0-9\.]*' `; fi
+  # sanitizer
   #
   # Use g++-7 as a proxy for having sanitizers, might need revision as they become available for more recent versions of clang/gcc
   - if [[ "$COMPILER" == "g++-7" ]]; then make clean && make -j2 ARCH=x86-64 sanitize=undefined optimize=no debug=yes build > /dev/null && ../tests/instrumented.sh --sanitizer-undefined; fi

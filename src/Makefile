@@ -247,6 +247,11 @@ ifeq ($(lcov),yes)
        lcov_generate = lcovgen
        gcc-profile-make-flags = -fprofile-generate -ftest-coverage
        PGOBENCH = ../tests/instrumented.sh
+ifdef GCOVTOOL
+      GCOV=$(GCOVTOOL)
+else
+      GCOV=gcov
+endif
 else
        lcov_generate = lcovclean
        gcc-profile-make-flags = -fprofile-generate
@@ -540,7 +545,7 @@ lcovclean:
 	@rm -rf coverage.info coveragedir
 
 lcovgen: lcovclean
-	@lcov --capture --directory . --no-external --output-file coverage.info > /dev/null
+	@lcov --capture --directory . --no-external --gcov-tool $(GCOV) --output-file coverage.info > /dev/null
 	@genhtml coverage.info --output-directory coveragedir > /dev/null
 	@echo "Generated coveragedir/index.html"
 

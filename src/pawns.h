@@ -37,6 +37,7 @@ struct Entry {
   Bitboard pawn_attacks(Color c) const { return pawnAttacks[c]; }
   Bitboard passed_pawns(Color c) const { return passedPawns[c]; }
   Bitboard pawn_attacks_span(Color c) const { return pawnAttacksSpan[c]; }
+  Bitboard closeness_factor() const { return closenessFactor; }
   int pawn_asymmetry() const { return asymmetry; }
   int open_files() const { return openFiles; }
 
@@ -76,6 +77,7 @@ struct Entry {
   int pawnsOnSquares[COLOR_NB][COLOR_NB]; // [color][light/dark squares]
   int asymmetry;
   int openFiles;
+  int closenessFactor;
 };
 
 typedef HashTable<Entry, 16384> Table;

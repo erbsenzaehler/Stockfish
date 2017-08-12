@@ -798,6 +798,9 @@ namespace {
                  &&  pos.count<PAWN>(strongSide) <= 2
                  && !pos.pawn_passed(~strongSide, pos.square<KING>(~strongSide)))
             return ScaleFactor(37 + 7 * pos.count<PAWN>(strongSide));
+        
+        if (pe->closeness_factor())
+            sf = ScaleFactor((SCALE_FACTOR_NORMAL - pe->closeness_factor()) * sf / SCALE_FACTOR_NORMAL);
     }
 
     return sf;

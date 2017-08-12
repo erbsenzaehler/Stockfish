@@ -197,8 +197,9 @@ namespace Pawns {
 /// to reduce independent parameters and to allow easier tuning and better insight.
 
 void init() {
-
+    
   static const int Seed[RANK_NB] = { 0, 13, 24, 18, 76, 100, 175, 330 };
+  Bitboard island = 0;
 
   for (int opposed = 0; opposed <= 1; ++opposed)
       for (int phalanx = 0; phalanx <= 1; ++phalanx)
@@ -210,6 +211,21 @@ void init() {
 
       Connected[opposed][phalanx][support][r] = make_score(v, v * (r - 2) / 4);
   }
+  
+  for (unsigned closedFiles = 0; closedFiles < 256; ++closedFiles)
+      for (File f = FILE_A; f <= FILE_H; ++f)
+      {
+          island |= closedFiles & (1 << f) ? file_bb(f) : 0;
+
+          if (!(closedFiles & (1 << f)) || f == FILE_H)
+          {
+              // Island has at least 3 pawns?
+              if (island && (file_of(msb(island)) - file_of(lsb(island)) >= 2))
+                  PawnIslands[closedFiles] |= island;
+
+              island = 0;
+          }
+      }  
 }
 
 
@@ -227,6 +243,34 @@ Entry* probe(const Position& pos) {
       return e;
 
   e->key = key;
+  e->closenessFactor = 0;
+  
+  // Closed position detector
+  Bitboard blockedPawns =  shift<SOUTH>(pos.pieces(BLACK, PAWN))
+                         & pos.pieces(WHITE, PAWN);
+
+  if (blockedPawns && popcount(blockedPawns) > 2)
+  {
+      unsigned closedFiles = 0;
+      for (File f = FILE_A; f <= FILE_H; ++f)
+          closedFiles |= blockedPawns & file_bb(f) ? (1 << f) : 0;
+
+      blockedPawns &= PawnIslands[closedFiles];
+
+      if (blockedPawns)
+      {
+          Square s0 = lsb(blockedPawns);
+          Square s1 = msb(blockedPawns);
+
+          int size   = popcount(blockedPawns);
+          int center = !!(blockedPawns & (file_bb(FILE_D) | file_bb(FILE_E)));
+          int chain  =    ((PseudoAttacks[BISHOP][s0] | s0) & blockedPawns) == blockedPawns
+                       || ((PseudoAttacks[BISHOP][s1] | s1) & blockedPawns) == blockedPawns;
+
+          e->closenessFactor = (chain ? 2 : 0) * (size * 3 + center * 2);
+      }
+  }
+  
   e->score = evaluate<WHITE>(pos, e) - evaluate<BLACK>(pos, e);
   e->asymmetry = popcount(e->semiopenFiles[WHITE] ^ e->semiopenFiles[BLACK]);
   e->openFiles = popcount(e->semiopenFiles[WHITE] & e->semiopenFiles[BLACK]);

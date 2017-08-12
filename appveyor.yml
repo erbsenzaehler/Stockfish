@@ -3,7 +3,7 @@ clone_depth: 50
 
 branches:
   only:
-    - master
+    - 1447
     - appveyor
 
 # Operating system (build VM template)

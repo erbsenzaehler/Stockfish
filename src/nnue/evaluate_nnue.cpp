@@ -11,6 +11,11 @@
 
 #include "evaluate_nnue.h"
 
+namespace std 
+{
+#include <cstdlib>
+}
+
 ExtPieceSquare kpp_board_index[PIECE_NB] = {
  // convention: W - us, B - them
  // viewed from other side, W and B are reversed

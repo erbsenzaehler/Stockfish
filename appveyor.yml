@@ -5,6 +5,7 @@ branches:
   only:
     - master
     - nnue-player-wip
+    - appveyor-net
 
 # Operating system (build VM template)
 os: Visual Studio 2019
@@ -65,6 +66,8 @@ build_script:
 
 before_test:
   - cd src/%CONFIGURATION%
+  - ps: Start-FileDownload 'https://raw.githubusercontent.com/official-stockfish/networks/master/nn-c157e0a5755b.nnue'
+  - ls -la
   - stockfish bench 2> out.txt >NUL
   - ps: |
       # Verify bench number

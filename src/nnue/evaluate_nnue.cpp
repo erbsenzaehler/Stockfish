@@ -160,7 +160,7 @@ namespace Eval::NNUE {
   // Evaluation function. Perform differential calculation.
   Value evaluate(const Position& pos) {
     Value v = ComputeScore(pos, false);
-    v = Utility::clamp(v, VALUE_TB_LOSS_IN_MAX_PLY + 1, VALUE_TB_WIN_IN_MAX_PLY - 1);
+    v = std::clamp(v, VALUE_TB_LOSS_IN_MAX_PLY + 1, VALUE_TB_WIN_IN_MAX_PLY - 1);
 
     return v;
   }

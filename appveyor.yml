@@ -39,7 +39,8 @@ before_build:
            'project(Stockfish)',
            'set(CMAKE_CXX_STANDARD 17)',
            'set(CMAKE_CXX_STANDARD_REQUIRED ON)',
-           'set (CMAKE_CXX_EXTENSIONS OFF)',
+           'set(CMAKE_CXX_EXTENSIONS OFF)',
+           'set(CMAKE_CXX_FLAGS "/W3 /O2 /arch:AVX  /DUSE_PREFETCH /DNDEBUG /EHsc")',
            'set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/src)',
            'set(source_files', $src, ')',
            'add_executable(stockfish ${source_files})'

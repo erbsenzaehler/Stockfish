@@ -542,7 +542,7 @@ int decompress_pairs(PairsData* d, uint64_t idx) {
     //       idx = k * d->span + idx % d->span    (2)
     //
     // So from (1) and (2) we can compute idx - I(K):
-    int diff = idx % d->span - d->span / 2;
+    int diff = static_cast<int>(idx % d->span - d->span / 2);
 
     // Sum the above to offset to find the offset corresponding to our idx
     offset += diff;
@@ -1001,7 +1001,7 @@ uint8_t* set_sizes(PairsData* d, uint8_t* data) {
     // Starting from this we compute a base64[] table indexed by symbol length
     // and containing 64 bit values so that d->base64[i] >= d->base64[i+1].
     // See http://www.eecs.harvard.edu/~michaelm/E210/huffman.pdf
-    for (int i = d->base64.size() - 2; i >= 0; --i) {
+    for (size_t i = d->base64.size() - 2; i >= 0; --i) {
         d->base64[i] = (d->base64[i + 1] + number<Sym, LittleEndian>(&d->lowestSym[i])
                                          - number<Sym, LittleEndian>(&d->lowestSym[i + 1])) / 2;
 
